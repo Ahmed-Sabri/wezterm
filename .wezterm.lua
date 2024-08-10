@@ -31,9 +31,9 @@ config.macos_window_background_blur = 10
 -- Custom key bindings for splitting the terminal
 config.keys = {
 	-- Change key binding for splitting horizontally
-	{key="RightArrow", mods="CTRL|SHIFT", action=wezterm.action{SplitHorizontal={domain="CurrentPaneDomain"}}},
+	{key="DownArrow", mods="CTRL|SHIFT", action=wezterm.action{SplitHorizontal={domain="CurrentPaneDomain"}}},
 	-- Change key binding for splitting vertically
-	{key="DownArrow", mods="CTRL|SHIFT", action=wezterm.action{SplitVertical={domain="CurrentPaneDomain"}}},
+	{key="RightArrow", mods="CTRL|SHIFT", action=wezterm.action{SplitVertical={domain="CurrentPaneDomain"}}},
 }
 
 -- Enable mouse function for copying and pasting
@@ -41,7 +41,7 @@ config.mouse_bindings = {
 	{
 		event={Up={streak=1, button="Left"}},
 		mods="NONE",
-		action=wezterm.action{CopyTo="ClipboardAndPrimarySelection"},
+		action=wezterm.action{CompleteSelection="ClipboardAndPrimarySelection"},
 	},
 	{
 		event={Up={streak=1, button="Right"}},
@@ -50,6 +50,8 @@ config.mouse_bindings = {
 	},
 }
 
+-- Key binding for pasting from clipboard (to ensure external copy-paste works)
+table.insert(config.keys, {key="v", mods="CTRL", action=wezterm.action{PasteFrom="Clipboard"}})
+
 -- and finally, return the configuration to wezterm
 return config
-
